@@ -5,6 +5,7 @@ class CSVReader
 
   def initialize (filename)
     @fname = filename
+  end
 
   def headers=(str)
     @headers = str.split(',')
