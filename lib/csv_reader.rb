@@ -32,6 +32,21 @@ class CSVReader
     h
   end
 
+  def read
+    #**'r'**
+    f = File.new(@fname, 'r')
+
+    #grab headers
+    self.headers = f.readline
+
+    #**Loop over the lines**
+    while (!f.eof? && next_line = f.readline)
+      values = next_line.split(',')
+      hash = create_hash(values)
+      yield(hash)
+    end
+  end
+
 end
 
 class String
