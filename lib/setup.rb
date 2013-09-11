@@ -1,4 +1,4 @@
-require_relative 'cvs_reader'
+require_relative 'csv_reader'
 require_relative 'area'
 
 class Setup
@@ -8,7 +8,7 @@ class Setup
     @areas = []
     csv = CSVReader.new("./free-zipcode-database.csv")
     
-    cvs.read do |item|
+    csv.read do |item|
       @areas << Area.new(item)
     end
 

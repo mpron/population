@@ -19,11 +19,12 @@ class Analytics
   def run (choice)
     opt = @options.select {|x| x[:menu_id] == choice}.first
     if opt.nil?
-      p "Invalid choice"
+      puts "Invalid choice"
     elsif opt[:method] != :exit
       #I got this line below without looking
       self.send opt[:method]
       :done
+      #what's the :done for?
     else
       opt[:method]
     end
@@ -46,7 +47,7 @@ class Analytics
 
 #3. Larest Population
   def largest_pop
-        sorted = @areas.sort do |x, y| 
+    sorted = @areas.sort do |x, y| 
       x.estimated_population <=> y.estimated_population
     end
     largest = sorted.reverse.drop_while { |i| i.estimated_population == 0 }.first
@@ -65,7 +66,7 @@ class Analytics
 #4. How many zips in California?
   def california_zips
     c = @areas.count {|x| x.state == "CA"}
-    p "There are #{c} zip code matches in California"
+    puts "There are #{c} zip code matches in California"
   end
 
 #5. Information for a given zip
@@ -74,11 +75,12 @@ class Analytics
     zip = gets.strip.to_i
     zips = @areas.select {|x| x.zipcode == zip}
     unless zips.empty?
-      p ""
+      puts ""
       #could we use the "to_s" method from Areas below instead of 'p'?
-      zips.each { |z| p z }
+      zips.each { |z| puts z }
     else
-      p "Zip not found"
+      puts "Zip not found"
+    end
   end
 
 #6. Exit
